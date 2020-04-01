@@ -23,11 +23,11 @@ public class CoderDao implements Dao<Coder> {
     public List<Coder> getAll() {
         List<Coder> results = new ArrayList<>();
 
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = Connector.getConnection();   //sono in corsivo quando sono definite dello stesso package
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(GET_ALL)) {
             while (rs.next()) {
-                LocalDate hireDate = rs.getDate(4).toLocalDate();
+                LocalDate hireDate = rs.getDate(4).toLocalDate();  //si estrae così perchè così o converto in LocalDate.
                 Coder coder = new Coder(rs.getLong(1), rs.getString(2), rs.getString(3), hireDate, rs.getDouble(5));
                 results.add(coder);
             }
@@ -47,7 +47,8 @@ public class CoderDao implements Dao<Coder> {
                 if (rs.next()) {
                     LocalDate hireDate = rs.getDate(4).toLocalDate();
                     Coder my = new Coder(rs.getLong(1), rs.getString(2), rs.getString(3), hireDate, rs.getDouble(5));
-                    return Optional.of(my);
+                    return Optional.of(my);  //Optional ti da l'opzione di ritornare l'oggetto Optional con l'oggetto dentro se esiste
+                    						// e se è un null o non esiste, ritorna un'oggetto Optional vuoto: empty. Per lo meno non è un null. 
                 }
             }
         } catch (SQLException se) {

@@ -8,20 +8,22 @@ import s14.dao.CoderDao;
 
 public class Main {
     public static void main(String[] args) {
-        CoderDao cd = new CoderDao();
+        CoderDao cd = new CoderDao(); 
 
         // create a new coder
         Coder tom = new Coder(501, "Tom", "Jones", 2000);
         cd.save(tom);
 
         // get a coder
-        Optional<Coder> opt = cd.get(501);
+        Optional<Coder> opt = cd.get(501);    //metti nell'optional per gestire i null.
         if (opt.isPresent()) {
             System.out.println("Coder 501: " + opt.get());
 
             Coder coder = opt.get();
             coder.setSalary(coder.getSalary() * 2);
             cd.update(coder);
+            
+
         } else {
             System.out.println("Unexpected! Can't get coder 501");
         }
